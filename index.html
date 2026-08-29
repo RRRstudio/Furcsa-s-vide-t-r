@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furcsa Só videó tár</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%B8%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=VT323&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-orange-1:#ff9b2f;
+    --bg-orange-2:#ff6a00;
+    --pink:#ff2fa0;
+    --purple:#9b30ff;
+    --purple-dark:#5e1fa8;
+    --green:#39ff6a;
+    --green-screen:#22e522;
+    --gold:#ffd400;
+    --blue:#1ec8ff;
+    --ink:#1a1a22;
+    --chrome-1:#f4f6ff;
+    --chrome-2:#b9c2e0;
+    --panel:#ffb35c;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,.35), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(255,255,255,.25), transparent 45%),
+      linear-gradient(160deg, var(--bg-orange-1), var(--bg-orange-2) 55%, #ff4d00 100%);
+    font-family:'Baloo 2', 'Comic Sans MS', sans-serif;
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+
+  /* ---------- sparkle layer ---------- */
+  #sparkles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+  }
+  .sparkle{
+    position:absolute;
+    width:14px;
+    height:14px;
+    background:radial-gradient(circle, #fff 0%, #fff 20%, transparent 70%);
+    clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity:.85;
+    animation:twinkle 2.4s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{transform:scale(.4) rotate(0deg);opacity:.2;}
+    50%{transform:scale(1) rotate(25deg);opacity:1;}
+  }
+
+  /* ---------- outer frame ---------- */
+  .site-frame{
+    position:relative;
+    z-index:2;
+    max-width:1200px;
+    margin:22px auto;
+    border:6px solid var(--ink);
+    border-radius:22px;
+    background:linear-gradient(180deg,#ffd27a,#ffb04d);
+    box-shadow:
+      0 0 0 4px var(--chrome-1),
+      0 0 0 8px var(--ink),
+      0 25px 60px rgba(0,0,0,.45);
+    padding:16px;
+  }
+
+  /* ---------- header banner ---------- */
+  .banner{
+    position:relative;
+    border:4px solid var(--ink);
+    border-radius:16px;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 10px, transparent 10px 20px),
+      linear-gradient(135deg, var(--purple), var(--pink) 60%, var(--purple));
+    padding:26px 20px 34px;
+    overflow:hidden;
+    text-align:center;
+  }
+  .banner .stars-deco{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+  .banner h1{
+    font-family:'Bangers', cursive;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    letter-spacing:2px;
+    margin:0;
+    line-height:.95;
+    color:var(--pink);
+    -webkit-text-stroke:3px var(--ink);
+    text-shadow:
+      0 2px 0 #fff,
+      0 4px 0 var(--purple-dark),
+      0 8px 18px rgba(0,0,0,.5);
+    transform:rotate(-1.5deg);
+  }
+  .banner .subtitle{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(.85rem, 2vw, 1.25rem);
+    color:#fff;
+    -webkit-text-stroke:1px var(--ink);
+    margin-top:8px;
+    letter-spacing:.5px;
+  }
+  .badge-tm{font-size:.6em;vertical-align:super;}
+
+  .cat-corner{
+    position:absolute;
+    top:8px;
+    left:10px;
+    text-align:center;
+    transform:rotate(-6deg);
+  }
+  .cat-corner .cat-emoji{
+    font-size:64px;
+    filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));
+    display:inline-block;
+  }
+  .cat-corner .cat-label{
+    font-family:'Bangers', cursive;
+    color:#fff;
+    background:var(--ink);
+    padding:2px 8px;
+    border-radius:8px;
+    font-size:.85rem;
+    display:inline-block;
+    transform:rotate(4deg);
+    margin-bottom:4px;
+  }
+
+  .crt-corner{
+    position:absolute;
+    top:10px;
+    right:14px;
+    width:150px;
+    text-align:center;
+  }
+  .crt-box{
+    background:linear-gradient(160deg,var(--chrome-1),var(--chrome-2));
+    border:3px solid var(--ink);
+    border-radius:10px 10px 4px 4px;
+    padding:6px;
+    box-shadow:0 6px 10px rgba(0,0,0,.35);
+  }
+  .crt-screen{
+    background:#001a00;
+    border:2px solid #000;
+    border-radius:4px;
+    padding:8px 6px;
+    font-family:'VT323', monospace;
+    color:#3dff6a;
+    font-size:.95rem;
+    line-height:1.15;
+    text-shadow:0 0 4px #3dff6a;
+    min-height:52px;
+    text-align:left;
+  }
+  .crt-stand{
+    width:26px;
+    height:14px;
+    background:var(--chrome-2);
+    border:2px solid var(--ink);
+    margin:0 auto;
+    border-radius:0 0 4px 4px;
+  }
+
+  /* ---------- nav tabs ---------- */
+  .tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px 0 14px;
+    padding:0 4px;
+  }
+  .tab-btn{
+    flex:1 1 150px;
+    font-family:'Bangers', cursive;
+    font-size:1.25rem;
+    letter-spacing:1px;
+    padding:14px 10px;
+    border:3px solid var(--ink);
+    border-radius:12px;
+    color:#fff;
+    text-shadow:0 2px 0 rgba(0,0,0,.4);
+    cursor:pointer;
+    box-shadow:0 5px 0 rgba(0,0,0,.35), inset 0 2px 0 rgba(255,255,255,.4);
+    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  }
+  .tab-btn:hover{filter:brightness(1.08);}
+  .tab-btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.35);}
+  .tab-btn.active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.35), inset 0 0 0 3px #fff;}
+
+  .tab-1{background:linear-gradient(180deg,#7bff5c,#22c93e);}
+  .tab-2{background:linear-gradient(180deg,#b06bff,#7b1fd6);}
+  .tab-3{background:linear-gradient(180deg,#ffb24d,#ff7a00);}
+  .tab-4{background:linear-gradient(180deg,#5cc9ff,#1e7fd6);}
+  .tab-5{background:linear-gradient(180deg,#ff5cc9,#d61e8f);}
+
+  /* ---------- info dropdown ---------- */
+  .info-drop{
+    display:none;
+    background:#fff0f8;
+    border:3px solid var(--ink);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:-4px 0 14px;
+    font-size:.95rem;
+    line-height:1.5;
+  }
+  .info-drop.open{display:block;}
+
+  /* ---------- content panel ---------- */
+  .panel{
+    border:4px solid var(--ink);
+    border-radius:16px;
+    background:
+      linear-gradient(160deg, rgba(255,255,255,.15), transparent 40%),
+      var(--panel);
+    padding:20px;
+    position:relative;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(90deg,#2a2a38,#4a4a64);
+    border:3px solid var(--ink);
+    border-radius:12px;
+    padding:12px 18px;
+    font-family:'Bangers', cursive;
+    color:var(--gold);
+    font-size:clamp(1.3rem,3vw,1.8rem);
+    letter-spacing:1px;
+    text-shadow:0 2px 0 #000;
+    margin-bottom:8px;
+  }
+  .section-head .ufo{font-size:1.4rem;}
+
+  .callout{
+    position:absolute;
+    top:14px;
+    right:22px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:14px;
+    padding:8px 12px;
+    font-size:.85rem;
+    transform:rotate(3deg);
+    box-shadow:0 4px 0 rgba(0,0,0,.2);
+  }
+  .callout::after{
+    content:"";
+    position:absolute;
+    bottom:-9px;
+    left:22px;
+    border-width:9px 6px 0 6px;
+    border-style:solid;
+    border-color:#fff transparent transparent transparent;
+  }
+
+  /* ---------- episode grid ---------- */
+  .grid-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:18px;
+  }
+  .arrow-btn{
+    flex:0 0 auto;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:3px solid var(--ink);
+    background:linear-gradient(180deg,#c98bff,#7b1fd6);
+    color:#fff;
+    font-size:1.3rem;
+    cursor:pointer;
+    box-shadow:0 4px 0 rgba(0,0,0,.35);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .arrow-btn:active{transform:translateY(3px);box-shadow:none;}
+
+  .episodes{
+    display:flex;
+    gap:22px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding:6px 4px 14px;
+    flex:1;
+  }
+  .episodes::-webkit-scrollbar{height:10px;}
+  .episodes::-webkit-scrollbar-thumb{background:var(--purple);border-radius:6px;}
+
+  .ep-card{
+    flex:0 0 auto;
+    width:300px;
+    text-align:center;
+  }
+  .ep-title{
+    font-family:'Bangers', cursive;
+    color:var(--purple-dark);
+    font-size:1.35rem;
+    -webkit-text-stroke:.6px var(--ink);
+    margin-bottom:6px;
+  }
+  .tv{
+    background:linear-gradient(160deg,#3a3a44,#141418);
+    border:5px solid #0b0b0c;
+    border-radius:14px 14px 10px 10px;
+    padding:10px;
+    box-shadow:0 8px 0 rgba(0,0,0,.3), 0 14px 20px rgba(0,0,0,.35);
+    cursor:pointer;
+    position:relative;
+  }
+  .tv-screen{
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 2px, transparent 2px 4px),
+      linear-gradient(160deg, #4dff4d, var(--green-screen));
+    border-radius:6px;
+    border:2px solid #000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .tv-screen .play-glyph{
+    width:0;height:0;
+    border-style:solid;
+    border-width:20px 0 20px 32px;
+    border-color:transparent transparent transparent rgba(0,0,0,.35);
+  }
+  .tv-screen::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, rgba(255,255,255,.35), transparent 40%);
+  }
+  .megnezem{
+    display:block;
+    margin:10px auto 0;
+    font-family:'Bangers', cursive;
+    font-size:1.05rem;
+    letter-spacing:1px;
+    background:linear-gradient(180deg,#ffe98a,var(--gold));
+    border:3px solid var(--ink);
+    border-radius:10px;
+    padding:8px 18px;
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:0 4px 0 rgba(0,0,0,.35);
+  }
+  .megnezem:active{transform:translateY(3px);box-shadow:none;}
+
+  /* corner decorations */
+  .corner-deco{
+    position:absolute;
+    bottom:10px;
+    font-size:1.6rem;
+  }
+  .rainbow-strip{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:110px;
+    height:16px;
+    background:linear-gradient(90deg,#ff003c,#ff9a00,#fff700,#3dff3d,#3dc9ff,#8a3dff);
+    border-radius:8px;
+    opacity:.9;
+  }
+  .speech-corner{
+    position:absolute;
+    right:14px;
+    bottom:8px;
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:14px 14px 14px 2px;
+    padding:8px 12px;
+    font-weight:700;
+    font-size:.85rem;
+    max-width:110px;
+  }
+
+  /* ---------- footer ---------- */
+  .footer{
+    margin-top:16px;
+    border:3px solid var(--ink);
+    border-radius:12px;
+    background:linear-gradient(90deg,#2a2a38,#3a3a4c);
+    color:#eee;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 18px;
+    font-size:.8rem;
+  }
+  .visitors{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'VT323', monospace;
+  }
+  .visitors .counter{
+    background:#001a00;
+    color:#3dff6a;
+    text-shadow:0 0 4px #3dff6a;
+    font-size:1.4rem;
+    padding:2px 8px;
+    border-radius:4px;
+    letter-spacing:2px;
+    border:2px solid #000;
+  }
+  .footer-badges{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .footer-badges div{
+    background:#fff;
+    color:#111;
+    border-radius:4px;
+    padding:4px 8px;
+    font-weight:700;
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:50;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-inner{
+    background:var(--ink);
+    border:4px solid var(--gold);
+    border-radius:14px;
+    padding:16px;
+    max-width:720px;
+    width:100%;
+    color:#fff;
+    text-align:center;
+    font-family:'Baloo 2', sans-serif;
+  }
+  .lightbox-inner h3{
+    font-family:'Bangers', cursive;
+    color:var(--gold);
+    margin-top:0;
+  }
+  .lightbox video, .lightbox iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    border-radius:8px;
+    background:#000;
+  }
+  .lightbox-close{
+    margin-top:12px;
+    font-family:'Bangers', cursive;
+    background:var(--gold);
+    border:none;
+    border-radius:8px;
+    padding:8px 20px;
+    cursor:pointer;
+    font-size:1rem;
+  }
+
+  @media (max-width:640px){
+    .crt-corner{position:static;margin:10px auto 0;}
+    .cat-corner{position:static;margin:0 auto 10px;}
+    .banner h1{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="sparkles"></div>
+
+<div class="site-frame">
+
+  <!-- ===== BANNER ===== -->
+  <header class="banner">
+    <div class="cat-corner">
+      <div class="cat-label">nagyon epic ↴</div><br>
+      <span class="cat-emoji">😎🐱</span>
+    </div>
+
+    <div class="crt-corner">
+      <div class="crt-box">
+        <div class="crt-screen" id="crtGreeting">Üdv<br>Furcsa Só<br>táron!<br><span id="crtBlink">_</span></div>
+      </div>
+      <div class="crt-stand"></div>
+    </div>
+
+    <h1>Furcsa Só videó tár</h1>
+    <div class="subtitle">A legdurvább animációs sorozat evör!!!<span class="badge-tm">™</span></div>
+  </header>
+
+  <!-- ===== TABS ===== -->
+  <nav class="tabs">
+    <button class="tab-btn tab-1 active" data-season="s1">★ 1. évad</button>
+    <button class="tab-btn tab-2" data-season="s2">2. évad</button>
+    <button class="tab-btn tab-3" data-season="reborn">Reborn</button>
+    <button class="tab-btn tab-4" data-season="egyeb">Egyéb</button>
+    <button class="tab-btn tab-5" id="infoTabBtn">Infó ▾</button>
+  </nav>
+
+  <div class="info-drop" id="infoDrop">
+    <strong>Info:</strong> Ez a Furcsa Só nevű animációs sorozat hivatalos videótára.
+    Minden rész saját "tévén" nézhető meg – kattints a "MEGNÉZEM!" gombra egy epizódnál.
+    A videólinkeket a <code>script.js</code>-ben lehet beállítani minden epizódnál.
+  </div>
+
+  <!-- ===== PANEL ===== -->
+  <main class="panel">
+    <div class="callout">Nézd meg <br>őket mind! 🙂</div>
+
+    <div class="section-head">
+      <span id="seasonTitle">★ 1. évad – Epizódok</span>
+      <span class="ufo">🛸</span>
+    </div>
+
+    <div class="grid-row">
+      <button class="arrow-btn" id="scrollLeft" aria-label="Előző">◀</button>
+      <div class="episodes" id="episodeGrid"></div>
+      <button class="arrow-btn" id="scrollRight" aria-label="Következő">▶</button>
+    </div>
+
+    <div class="rainbow-strip"></div>
+    <div class="speech-corner">Furcsa<br>só!!!11!</div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div>© <span id="year"></span> Furcsa Só – Minden jog fenntartva! (?)</div>
+    <div class="visitors">
+      Látogatók:
+      <span class="counter" id="hitCounter">0001337</span>
+    </div>
+    <div class="footer-badges">
+      <div>📝 Made with Notepad</div>
+      <div>🖥️ Best viewed with Windows XP</div>
+      <div>⭐ Design by TE</div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <h3 id="lightboxTitle">Epizód</h3>
+    <div id="lightboxMedia"></div>
+    <button class="lightbox-close" id="lightboxClose">Bezár</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
