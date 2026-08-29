@@ -18,6 +18,8 @@ const SEASONS = {
       { title: "1. rész", videoUrl: "" },
       { title: "2. rész", videoUrl: "" },
       { title: "3. rész", videoUrl: "" },
+      { title: "4. rész", videoUrl: "" },
+      { title: "5. rész", videoUrl: "" },
     ],
   },
   s2: {
@@ -36,8 +38,8 @@ const SEASONS = {
   egyeb: {
     title: "Egyéb videók",
     episodes: [
-      { title: "Bloopers", videoUrl: "" },
-      { title: "Making of", videoUrl: "" },
+      { title: " ", videoUrl: "" },
+      { title: " ", videoUrl: "" },
     ],
   },
 };
