@@ -127,8 +127,12 @@
     transform:rotate(-6deg);
   }
   .cat-corner .cat-emoji{
-    font-size:64px;
-    filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));
+    width:72px;
+    height:72px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid var(--ink);
+    box-shadow:0 6px 6px rgba(0,0,0,.4);
     display:inline-block;
   }
   .cat-corner .cat-label{
@@ -507,7 +511,7 @@
   <header class="banner">
     <div class="cat-corner">
       <div class="cat-label">nagyon epic ↴</div><br>
-      <span class="cat-emoji">😎🐱</span>
+      <img class="cat-emoji" src="images/cool-emoji.png" alt="menő szemüveges emoji">
     </div>
 
     <div class="crt-corner">
