@@ -1,17 +1,33 @@
-function scrollToSection(id){const section=document.getElementById(id);if(section){section.scrollIntoView({behavior:"smooth"});}}
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll("[data-page]");
+  const pages = document.querySelectorAll(".page");
 
-const popup=document.getElementById("popup");
-const popupText=document.getElementById("popupText");
+  function showPage(id) {
+    pages.forEach(page => {
+      page.classList.toggle("active", page.id === id);
+    });
 
-function showPopup(text){popupText.textContent=text;popup.classList.add("active");}
-function closePopup(){popup.classList.remove("active");}
-function episodeComingSoon(number){showPopup(`A ${number}. epizód hamarosan megtekinthető lesz! 🧂`);}
-function guestbook(){showPopup("A vendégkönyv hamarosan megnyílik! 💬");}
+    buttons.forEach(button => {
+      button.classList.toggle("active", button.dataset.page === id);
+    });
 
-let visitors=localStorage.getItem("furcsaSoVisitors");
-if(!visitors){visitors=1;}else{visitors=Number(visitors)+1;}
-localStorage.setItem("furcsaSoVisitors",visitors);
-document.getElementById("visitorCount").textContent=String(visitors).padStart(6,"0");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
 
-popup.addEventListener("click",function(event){if(event.target===popup){closePopup();}});
-document.addEventListener("keydown",function(event){if(event.key==="Escape"){closePopup();}});
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.page);
+    });
+  });
+
+  const year = document.querySelector("#year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  showPage("home");
+});
