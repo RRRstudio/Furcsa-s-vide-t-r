@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Furcsa Só — Hivatalos oldal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-shell">
+
+  <header class="hero">
+    <div class="hero-left">
+      <div class="cat">😎🐱</div>
+      <div class="bubble">nagyon epic<br>↘</div>
+    </div>
+
+    <div class="logo-area">
+      <div class="stars">✦ ✧ ★ ✦ ✧</div>
+      <h1>Furcsa Só<span>vital</span></h1>
+      <p>A legdurvább animációs sorozat évör!!!™</p>
+    </div>
+
+    <div class="hero-monitor">
+      <div class="monitor-screen">
+        <span>Üdv</span><br>
+        Furcsa Só<br>
+        téren
+        <small>^_^</small>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a class="active" href="#episodes">⭐ 1 évad</a>
+    <a href="#season2">2 évad</a>
+    <a href="#about">Reborn</a>
+    <a href="#gallery">Egyéb</a>
+    <a href="#info">Infó ▼</a>
+  </nav>
+
+  <main class="content">
+
+    <section class="season" id="episodes">
+      <div class="season-title">
+        <span>⭐ 1. évad - Epizódok</span>
+        <i>🛸</i>
+      </div>
+
+      <div class="fun-text">Nézd meg<br>őket mind! ☺</div>
+
+      <div class="episodes-row">
+
+        <button class="arrow left" aria-label="Előző epizód">‹</button>
+
+        <article class="episode-card">
+          <h2>1. rész</h2>
+          <div class="tv">
+            <div class="tv-screen">
+              <span>1.</span>
+              <small>EPIZÓD</small>
+            </div>
+          </div>
+          <button class="watch" onclick="openEpisode(1)">▷ MEGNÉZEM!</button>
+        </article>
+
+        <article class="episode-card">
+          <h2>2. rész</h2>
+          <div class="tv">
+            <div class="tv-screen">
+              <span>2.</span>
+              <small>EPIZÓD</small>
+            </div>
+          </div>
+          <button class="watch" onclick="openEpisode(2)">▷ MEGNÉZEM!</button>
+        </article>
+
+        <article class="episode-card">
+          <h2>3. rész</h2>
+          <div class="tv">
+            <div class="tv-screen">
+              <span>3.</span>
+              <small>EPIZÓD</small>
+            </div>
+          </div>
+          <button class="watch" onclick="openEpisode(3)">▷ MEGNÉZEM!</button>
+        </article>
+
+        <button class="arrow right" aria-label="Következő epizód">›</button>
+      </div>
+    </section>
+
+    <section class="info-strip" id="info">
+      <div>
+        <b>🧂 FURCSA SÓ</b>
+        <span>Teljesen normális animációs sorozat... elvileg.</span>
+      </div>
+      <button onclick="showInfo()">TÖBB INFÓ</button>
+    </section>
+
+    <section class="extra-grid" id="gallery">
+      <div class="mini-box">
+        <h3>📸 KÉPEK</h3>
+        <p>Karakterek, jelenetek és random furcsaságok.</p>
+      </div>
+      <div class="mini-box" id="about">
+        <h3>👾 REBORN</h3>
+        <p>Extra tartalmak és a Furcsa Só univerzum lore-ja.</p>
+      </div>
+      <div class="mini-box">
+        <h3>💬 VENDEGKÖNYV</h3>
+        <p>Írd le, szerinted melyik a legfurcsább rész.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>© 2026 Furcsa Só — Minden jog fenntartva! (?)</div>
+    <div class="visitor">
+      Látogatók:
+      <strong id="visitorCount">0000000</strong>
+    </div>
+    <div class="badges">
+      <span>🗒 Made with Notepad</span>
+      <span>Best viewed with<br><b>Windows xp</b></span>
+      <span>Design by<br><b>DORFI ⭐</b></span>
+    </div>
+  </footer>
+
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <button class="close" onclick="closePopup()">×</button>
+    <h2>🧂 FURCSA SÓ</h2>
+    <p id="popupText"></p>
+    <button onclick="closePopup()">OKÉ</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
