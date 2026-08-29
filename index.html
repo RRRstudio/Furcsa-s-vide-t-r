@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furcsa Só — Hivatalos oldal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <header class="top-bar">
+        <div class="mini-logo">🧂 FURCSA SÓ</div>
+        <div class="status">● ONLINE</div>
+    </header>
+
+    <main class="site">
+        <section class="hero">
+            <div class="sparkle sparkle1">✦</div>
+            <div class="sparkle sparkle2">✧</div>
+            <div class="sparkle sparkle3">★</div>
+
+            <p class="small-title">ÜDVÖZLÜNK A HIVATALOS</p>
+            <h1>FURCSA<br><span>SÓ</span></h1>
+            <p class="subtitle">AZ INTERNET LEGFURCSÁBB SOROZATA™</p>
+
+            <div class="hero-buttons">
+                <button onclick="scrollToSection('episodes')">📺 EPIZÓDOK</button>
+                <button onclick="scrollToSection('info')">ℹ️ INFÓ</button>
+                <button onclick="scrollToSection('gallery')">🖼️ KÉPEK</button>
+            </div>
+        </section>
+
+        <section class="panel news">
+            <div class="panel-title">📢 LEGFRISSEBB HÍREK</div>
+            <div class="news-content">
+                <div class="news-item"><span class="new">NEW!</span> Új Furcsa Só epizód hamarosan!</div>
+                <div class="news-item">🧂 Az oldal még fejlesztés alatt áll...</div>
+                <div class="news-item">🔥 Köszönjük, hogy benéztél!</div>
+            </div>
+        </section>
+
+        <section class="panel" id="episodes">
+            <div class="panel-title">📺 EPIZÓDOK</div>
+            <div class="episode-grid">
+                <article class="episode">
+                    <div class="episode-number">01</div>
+                    <div><h3>1. EPIZÓD</h3><p>Az első furcsa kaland...</p></div>
+                    <button onclick="episodeComingSoon(1)">▶ MEGNÉZEM</button>
+                </article>
+                <article class="episode">
+                    <div class="episode-number">02</div>
+                    <div><h3>2. EPIZÓD</h3><p>A dolgok egyre furcsábbak.</p></div>
+                    <button onclick="episodeComingSoon(2)">▶ MEGNÉZEM</button>
+                </article>
+                <article class="episode">
+                    <div class="episode-number">03</div>
+                    <div><h3>3. EPIZÓD</h3><p>Mi történik itt?!</p></div>
+                    <button onclick="episodeComingSoon(3)">▶ MEGNÉZEM</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel" id="info">
+            <div class="panel-title">ℹ️ FURCSA SÓ INFÓ</div>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>🧂 A SOROZATRÓL</h3>
+                    <p>Üdv a Furcsa Só világában! Ez egy teljesen normális animációs sorozat, amelyben semmi furcsa nem történik.</p>
+                    <p>...valószínűleg.</p>
+                </div>
+                <div class="info-box">
+                    <h3>👥 SZEREPLŐK</h3>
+                    <p>Hamarosan megismerheted a Furcsa Só univerzumának összes fontos szereplőjét.</p>
+                </div>
+                <div class="info-box">
+                    <h3>📖 VENDEGKÖNYV</h3>
+                    <p>Írd meg, mit gondolsz a sorozatról!</p>
+                    <button onclick="guestbook()">💬 VENDEGKÖNYV</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="gallery">
+            <div class="panel-title">🖼️ KÉPGALÉRIA</div>
+            <div class="gallery">
+                <div class="image-placeholder"><span>🧂</span><p>KÉP #01</p></div>
+                <div class="image-placeholder"><span>👀</span><p>KÉP #02</p></div>
+                <div class="image-placeholder"><span>🔥</span><p>KÉP #03</p></div>
+                <div class="image-placeholder"><span>❓</span><p>KÉP #04</p></div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-title">🎬 VIDEÓ</div>
+            <div class="video-box">
+                <div class="video-screen">
+                    <div class="play-symbol">▶</div>
+                    <p>A VIDEÓ HELYE</p>
+                    <small>YouTube videó hamarosan</small>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-logo">🧂 FURCSA SÓ</div>
+            <p>© 2026 Furcsa Só • Minden jog fenntartva</p>
+            <p class="old-web">BEST VIEWED AT 1024×768</p>
+            <div class="counter">VISITORS: <span id="visitorCount">000001</span></div>
+        </footer>
+    </main>
+
+    <div id="popup" class="popup">
+        <div class="popup-box">
+            <button class="close" onclick="closePopup()">×</button>
+            <h2>🧂 FURCSA SÓ</h2>
+            <p id="popupText">Hamarosan...</p>
+            <button onclick="closePopup()">OKÉ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
