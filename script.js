@@ -15,16 +15,18 @@ const SEASONS = {
   s1: {
     title: "★ 1. évad – Epizódok",
     episodes: [
-      { title: "1. rész", videoUrl: "" },
-      { title: "2. rész", videoUrl: "" },
-      { title: "3. rész", videoUrl: "" },
+      { title: "1. rész", videoUrl: "https://youtu.be/QjfZe6POnHw" },
+      { title: "2. rész", videoUrl: "https://youtu.be/vpa2Bnuat6o" },
+      { title: "3. rész", videoUrl: "https://youtu.be/ijUR5ZruQhY" },
+      { title: "4. rész", videoUrl: "https://youtu.be/Ekz4gJYH3IM" },
+      { title: "5. rész", videoUrl: "https://youtu.be/OUuA1_e5tJM" },
     ],
   },
   s2: {
     title: "2. évad – Epizódok",
     episodes: [
-      { title: "1. rész", videoUrl: "" },
-      { title: "2. rész", videoUrl: "" },
+      { title: "1. rész", videoUrl: "https://youtu.be/JbEPuYqJn6U" },
+      { title: "2. rész", videoUrl: "https://youtu.be/R0MoglheiCU" },
     ],
   },
   reborn: {
@@ -36,8 +38,8 @@ const SEASONS = {
   egyeb: {
     title: "Egyéb videók",
     episodes: [
-      { title: "Bloopers", videoUrl: "" },
-      { title: "Making of", videoUrl: "" },
+      { title: " ", videoUrl: "https://youtube.com/shorts/7lL3KFPihco?feature=share" },
+      { title: " ", videoUrl: "https://youtube.com/shorts/_W_8SklUyRs?feature=share" },
     ],
   },
 };
