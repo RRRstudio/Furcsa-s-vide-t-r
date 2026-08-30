@@ -120,10 +120,38 @@ const lightbox = document.getElementById("lightbox");
 const lightboxTitle = document.getElementById("lightboxTitle");
 const lightboxMedia = document.getElementById("lightboxMedia");
 
+/* A YouTube csak a "/embed/VIDEO_ID" formátumú linkeket engedi iframe-be
+   ágyazni — a sima "youtube.com/watch?v=..." vagy "youtu.be/..." linkeket
+   letiltja ("refused to connect"). Ez a függvény automatikusan átalakítja
+   bármelyik formátumot a megfelelő embed linkké, hogy ne kelljen kézzel
+   bajlódni vele. */
+function toEmbedUrl(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    let videoId = "";
+    if (u.hostname.includes("youtu.be")) {
+      videoId = u.pathname.slice(1);
+    } else if (u.hostname.includes("youtube.com")) {
+      if (u.pathname === "/watch") {
+        videoId = u.searchParams.get("v");
+      } else if (u.pathname.startsWith("/embed/")) {
+        return url; // már jó formátum
+      } else if (u.pathname.startsWith("/shorts/")) {
+        videoId = u.pathname.split("/")[2];
+      }
+    }
+    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+  } catch (e) {
+    /* nem érvényes URL, vagy nem YouTube link — változatlanul hagyjuk */
+  }
+  return url;
+}
+
 function openLightbox(title, videoUrl) {
   lightboxTitle.textContent = title;
   if (videoUrl) {
-    lightboxMedia.innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
+    lightboxMedia.innerHTML = `<iframe src="${toEmbedUrl(videoUrl)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
   } else {
     lightboxMedia.innerHTML = `<p style="font-family:'Baloo 2';">
       Ehhez a részhez még nincs videó beállítva.<br>
