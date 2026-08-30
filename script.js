@@ -18,8 +18,6 @@ const SEASONS = {
       { title: "1. rész", videoUrl: "" },
       { title: "2. rész", videoUrl: "" },
       { title: "3. rész", videoUrl: "" },
-      { title: "4. rész", videoUrl: "" },
-      { title: "5. rész", videoUrl: "" },
     ],
   },
   s2: {
@@ -38,8 +36,8 @@ const SEASONS = {
   egyeb: {
     title: "Egyéb videók",
     episodes: [
-      { title: " ", videoUrl: "" },
-      { title: " ", videoUrl: "" },
+      { title: "Bloopers", videoUrl: "" },
+      { title: "Making of", videoUrl: "" },
     ],
   },
 };
@@ -152,11 +150,30 @@ lightbox.addEventListener("click", (e) => {
   }
 });
 
-/* ---------------------------- HIT COUNTER -------------------------------- */
-function tickCounter() {
+/* ---------------------------- HIT COUNTER --------------------------------
+   Valódi, minden látogatónál növekvő számláló, az ingyenes CountAPI
+   szolgáltatással (nincs szükség saját szerverre / adatbázisra).
+   A NAMESPACE-t érdemes egyedire cserélni (pl. a saját domained neve),
+   hogy ne ütközzön mások azonos nevű számlálójával.
+   Doksi: https://countapi.xyz
+---------------------------------------------------------------------------- */
+const COUNTAPI_NAMESPACE = "furcsa-so-videotar-2026";
+const COUNTAPI_KEY = "latogatok";
+
+async function tickCounter() {
   const el = document.getElementById("hitCounter");
-  const base = 1337 + Math.floor(Math.random() * 40);
-  el.textContent = String(base).padStart(7, "0");
+  try {
+    const res = await fetch(
+      `https://api.countapi.xyz/hit/${COUNTAPI_NAMESPACE}/${COUNTAPI_KEY}`
+    );
+    if (!res.ok) throw new Error("countapi hiba");
+    const data = await res.json();
+    el.textContent = String(data.value).padStart(7, "0");
+  } catch (err) {
+    // ha nem elérhető a szolgáltatás (pl. nincs net, vagy le van tiltva),
+    // ne törjön el az oldal — mutasson egy semleges placeholdert.
+    el.textContent = "???????";
+  }
 }
 
 /* ----------------------------- CRT BLINK --------------------------------- */
