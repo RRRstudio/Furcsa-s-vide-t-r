@@ -340,6 +340,8 @@
     background:
       repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 2px, transparent 2px 4px),
       linear-gradient(160deg, #4dff4d, var(--green-screen));
+    background-size:cover;
+    background-position:center;
     border-radius:6px;
     border:2px solid #000;
     display:flex;
@@ -353,6 +355,23 @@
     border-style:solid;
     border-width:20px 0 20px 32px;
     border-color:transparent transparent transparent rgba(0,0,0,.35);
+    position:relative;
+    z-index:2;
+  }
+  .tv-screen.has-thumb .play-glyph{
+    border-color:transparent transparent transparent #fff;
+    filter:drop-shadow(0 0 6px rgba(0,0,0,.8));
+  }
+  .tv-screen.has-thumb .play-glyph-bg{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:rgba(0,0,0,.45);
+    z-index:1;
   }
   .tv-screen::before{
     content:"";
