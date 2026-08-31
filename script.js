@@ -77,10 +77,17 @@ function renderSeason(key) {
   season.episodes.forEach((ep) => {
     const card = document.createElement("div");
     card.className = "ep-card";
+    const thumbId = getYouTubeId(ep.videoUrl);
+    const thumbStyle = thumbId
+      ? ` style="background-image:url('https://img.youtube.com/vi/${thumbId}/hqdefault.jpg')"`
+      : "";
+    const glyphBg = thumbId ? `<div class="play-glyph-bg"></div>` : "";
     card.innerHTML = `
       <div class="ep-title">${ep.title}</div>
       <div class="tv" data-title="${ep.title}" data-video="${ep.videoUrl}">
-        <div class="tv-screen"><div class="play-glyph"></div></div>
+        <div class="tv-screen${thumbId ? " has-thumb" : ""}"${thumbStyle}>
+          ${glyphBg}<div class="play-glyph"></div>
+        </div>
       </div>
       <button class="megnezem">▶ MEGNÉZEM!</button>
     `;
@@ -122,30 +129,31 @@ const lightboxMedia = document.getElementById("lightboxMedia");
 
 /* A YouTube csak a "/embed/VIDEO_ID" formátumú linkeket engedi iframe-be
    ágyazni — a sima "youtube.com/watch?v=..." vagy "youtu.be/..." linkeket
-   letiltja ("refused to connect"). Ez a függvény automatikusan átalakítja
-   bármelyik formátumot a megfelelő embed linkké, hogy ne kelljen kézzel
-   bajlódni vele. */
-function toEmbedUrl(url) {
-  if (!url) return url;
+   letiltja ("refused to connect"). Ez a két függvény kinyeri a videó
+   azonosítóját bármelyik szokásos linkformátumból (watch / youtu.be /
+   shorts / már kész embed), amit aztán a lejátszáshoz ÉS a borítókép
+   megjelenítéséhez is felhasználunk. */
+function getYouTubeId(url) {
+  if (!url) return null;
   try {
     const u = new URL(url);
-    let videoId = "";
     if (u.hostname.includes("youtu.be")) {
-      videoId = u.pathname.slice(1);
-    } else if (u.hostname.includes("youtube.com")) {
-      if (u.pathname === "/watch") {
-        videoId = u.searchParams.get("v");
-      } else if (u.pathname.startsWith("/embed/")) {
-        return url; // már jó formátum
-      } else if (u.pathname.startsWith("/shorts/")) {
-        videoId = u.pathname.split("/")[2];
-      }
+      return u.pathname.slice(1);
     }
-    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    if (u.hostname.includes("youtube.com")) {
+      if (u.pathname === "/watch") return u.searchParams.get("v");
+      if (u.pathname.startsWith("/embed/")) return u.pathname.split("/")[2];
+      if (u.pathname.startsWith("/shorts/")) return u.pathname.split("/")[2];
+    }
   } catch (e) {
-    /* nem érvényes URL, vagy nem YouTube link — változatlanul hagyjuk */
+    /* nem érvényes vagy nem YouTube link */
   }
-  return url;
+  return null;
+}
+
+function toEmbedUrl(url) {
+  const videoId = getYouTubeId(url);
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }
 
 function openLightbox(title, videoUrl) {
